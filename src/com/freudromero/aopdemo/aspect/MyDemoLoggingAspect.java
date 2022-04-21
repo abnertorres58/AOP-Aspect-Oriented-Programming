@@ -16,6 +16,14 @@ import java.util.Locale;
 @Order(2)
 public class MyDemoLoggingAspect {
 
+    @After("execution(* com.freudromero.aopdemo.dao.AccountDAO.findAccounts(..))")
+    public void afterFinallyFindAccountsAdvice(JoinPoint theJointPoint) {
+
+        // Print out which method are we advising on
+        String method = theJointPoint.getSignature().toShortString();
+        System.out.println("\n===========> Executing @After (finally) on method: " + method);
+    }
+
     @AfterThrowing(
             pointcut = "execution(* com.freudromero.aopdemo.dao.AccountDAO.findAccounts(..))",
             throwing = "theExc")
