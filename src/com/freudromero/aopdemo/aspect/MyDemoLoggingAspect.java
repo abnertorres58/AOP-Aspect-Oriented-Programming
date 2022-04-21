@@ -12,6 +12,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Locale;
 
 @Aspect
 @Component
@@ -29,6 +30,23 @@ public class MyDemoLoggingAspect {
 
         // Print out the results of the method call
         System.out.println("\n===========> Result is: " + result);
+
+        // Let's post-process the data ... let's modify it
+
+        // Convert the account names to uppercase
+        convertAccountNamesToUpperCase(result);
+
+        System.out.println("\n===========> Result is: " + result);
+
+    }
+
+    private void convertAccountNamesToUpperCase(List<Account> result) {
+        // Loop through accounts
+        for(Account tempAccount : result) {
+            // Get uppercase version of name
+            // Update the name on the account
+            tempAccount.setName(tempAccount.getName().toUpperCase());
+        }
     }
 
 
